@@ -49,4 +49,9 @@ class Agent(object):
 		}
 
 		result = self.xmlrpc.SearchSubtitles(self.token, [params])
-
+		data = result['data']
+		if data:
+			key = kwargs.get('sort_by', None)
+			if key:
+				data.sort(key=lambda x : x[key], reverse=True)
+		return data
